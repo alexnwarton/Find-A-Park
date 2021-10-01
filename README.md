@@ -8,7 +8,7 @@ A user enters their zip code and the app returns the closest national park to th
 US National Parks Service: https://www.nps.gov/subjects/developer/api-documentation.htm#/
 
 ## Postman Snippet: 
-![image info](./users/alexwarton/desktop/Postman-snippet.png)
+![Postman Snippet](images/Postman-snippet.png)
 
 ## Wireframes: 
 Wireframe: https://whimsical.com/find-a-park-N4oUtNMiKhevmnEFcG1gzC
