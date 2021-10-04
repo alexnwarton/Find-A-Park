@@ -31,9 +31,9 @@ btn.addEventListener("click", () => {
 				.then((jsonResponse) => {
 			
 					let parkList = findParks(jsonResponse);
-					//console.log(nearbyParks(parkList, userInput));
-					//console.log(parkList);
-					//console.log(userInput);
+
+
+			
 					let closestPark = nearbyParks(parkList, userInput);
 					document.querySelector("#descriptionH2").append(closestPark.fullName);
 					document.querySelector("#descriptionP").append(closestPark.description);
@@ -97,17 +97,24 @@ const calcDistance = (park1, park2) => {
 
 //Finds the closest park based on the user input
 const nearbyParks = (parkList, input) => {
+ 
+ document.querySelector("#descriptionP").innerHTML = "";
+ document.querySelector("#descriptionH2").innerHTML = "";
+ document.querySelector("ul").innerHTML = "";
+ document.querySelector("#weatherP").innerHTML = "";
+ document.querySelector("a").innerHTML = "";
+
  let natParksNear = parkList[0];
  let minDistance = calcDistance(input, [parseFloat(parkList[0].latitude), parseFloat(parkList[0].longitude)]);
  let parkLat;
  let parkLong;
  let distance;
- console.log("Iterate through parks: ");
+ 
  parkList.forEach((park, i) => {
  	parkLat = parseFloat(park.latitude);
  	parkLong = parseFloat(park.longitude);
  	distance = calcDistance(input, [parkLat, parkLong]);
- 	//console.log(park.name, distance);
+ 
  	if(distance < minDistance) {
  		minDistance = distance;
  		natParksNear = park;
