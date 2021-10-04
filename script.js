@@ -32,9 +32,24 @@ btn.addEventListener("click", () => {
 			
 					let parkList = findParks(jsonResponse);
 					//console.log(nearbyParks(parkList, userInput));
-					console.log(parkList);
-					console.log(userInput);
-					console.log(nearbyParks(parkList, userInput));
+					//console.log(parkList);
+					//console.log(userInput);
+					let closestPark = nearbyParks(parkList, userInput);
+					document.querySelector("#descriptionH2").append(closestPark.fullName);
+					document.querySelector("#descriptionP").append(closestPark.description);
+					document.querySelector("#parkImage").setAttribute("src", closestPark.images[0].url);
+
+					const activities = closestPark.activities;
+					activities.forEach((item, i) => {
+						let activity = document.createElement("li");
+						activity.innerText = item.name;
+						document.querySelector("ul").append(activity);
+					})
+
+					document.querySelector("#weatherP").append(closestPark.weatherInfo);
+
+					document.querySelector("a").setAttribute("href", closestPark.url);
+					document.querySelector("a").innerText = "Learn more about this park";
 			
 				})
 				
@@ -92,7 +107,7 @@ const nearbyParks = (parkList, input) => {
  	parkLat = parseFloat(park.latitude);
  	parkLong = parseFloat(park.longitude);
  	distance = calcDistance(input, [parkLat, parkLong]);
- 	console.log(park.name, distance);
+ 	//console.log(park.name, distance);
  	if(distance < minDistance) {
  		minDistance = distance;
  		natParksNear = park;
