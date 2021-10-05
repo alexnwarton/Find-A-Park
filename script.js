@@ -2,11 +2,16 @@ const baseUrl = "https://developer.nps.gov/api/v1/parks";
 const apiKey = "6XXFeplxHFNsohc79vCep4HHyd10N4ARh557F2ep"
 
 
-
-
-
-
+let inputBar = document.querySelector("input");
 let btn = document.querySelector("button");
+let mainHeader = document.querySelector("header");
+// document.addEventListener('DOMContentLoaded', () => {
+	
+
+// })
+
+
+
 btn.addEventListener("click", () => {
 	let userInput = document.querySelector("input").value;
 	let zipToLatLong = [];
@@ -31,14 +36,22 @@ btn.addEventListener("click", () => {
 				.then((jsonResponse) => {
 			
 					let parkList = findParks(jsonResponse);
-
-
 			
 					let closestPark = nearbyParks(parkList, userInput);
+
+					//const parkImages = closestPark.images
+
+					// closestPark.forEach((image, i) => {
+					// 	parkImages.push(image[i].url);
+					// })
+					// console.log(parkImages);
+
 					document.querySelector("#descriptionH2").append(closestPark.fullName);
 					document.querySelector("#descriptionP").append(closestPark.description);
 					document.querySelector("#parkImage").setAttribute("src", closestPark.images[0].url);
+					//document.querySelector("#parkImage").style.height = "500px";
 
+					document.querySelector("#activitiesH2").innerText = "Available Park Activities";
 					const activities = closestPark.activities;
 					activities.forEach((item, i) => {
 						let activity = document.createElement("li");
@@ -46,14 +59,22 @@ btn.addEventListener("click", () => {
 						document.querySelector("ul").append(activity);
 					})
 
+					document.querySelector("#weatherH2").innerText = "Weather Information";
 					document.querySelector("#weatherP").append(closestPark.weatherInfo);
 
 					document.querySelector("a").setAttribute("href", closestPark.url);
 					document.querySelector("a").innerText = "Learn more about this park";
 			
 				})
+
+				.catch((error) => {
+					console.log(`Error:  {error}`);
+				})
 				
 		})
+		.catch((error) => {
+					console.log(`Error:  {error}`);
+				})
 			
 	
 
@@ -98,9 +119,12 @@ const calcDistance = (park1, park2) => {
 //Finds the closest park based on the user input
 const nearbyParks = (parkList, input) => {
  
+ document.querySelector("input").value = "";
  document.querySelector("#descriptionP").innerHTML = "";
  document.querySelector("#descriptionH2").innerHTML = "";
+ document.querySelector("#activitiesH2").innerHTML = "";
  document.querySelector("ul").innerHTML = "";
+ document.querySelector("#weatherH2").innerHTML = "";
  document.querySelector("#weatherP").innerHTML = "";
  document.querySelector("a").innerHTML = "";
 
@@ -122,4 +146,23 @@ const nearbyParks = (parkList, input) => {
  })
  	
  	return natParksNear;
+}
+
+
+// Styles the search bar after a search is made
+const searchStyling = () => {
+
+	mainHeader.style.height = "100px";
+	mainHeader.style.width = "300px";
+	mainHeader.style.flexDirection = "column";
+	mainHeader.style.justifyContent = "flex-start";
+	document.querySelector("h1").style.fontSize = "20px";
+	document.querySelector("h1").style.textAlign = "right";
+	inputBar.style.height = "15px";
+	inputBar.style.width = "100px";
+	inputBar.style.fontSize = "10px";
+	btn.style.height = "20px";
+	btn.style.width = "50px";
+	btn.style.fontSize = "10px";
+
 }
