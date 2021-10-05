@@ -1,20 +1,49 @@
-body {
-  /* background-image: url("https://spacetourismguide.com/wp-content/uploads/2018/05/Milky-Way-in-Joshua-Tree-National-Park-NPSBrad-Sutton.jpg"); */
+
+
+.screenOne {
+
+  height: 600px;
+  width:  900px;
+
+}
+
+#firstH1 {
+  
+  font-size: 150px;
+  display: flex;
+  margin-bottom: 10px;
+  font-family: "Cabin Sketch";
+}
+
+
+#firstInput {
+  height:  70px;
+  width:  450px;
+  font-size: 50px;
+}
+
+#firstBtn {
+  height: 78px;
+  width: 200px;
+  font-size: 50px;
 }
 
 h1 {
-  color: blue;
-  text-decoration: blink;
+  color: forestgreen;
   text-align: center;
   font-size: 100px;
   display: flex;
   margin-bottom: 10px;
+  font-family: "Cabin Sketch";
 }
+
 
 header {
   display: flex;
   align-items: center;
   flex-direction: column;
+  height: 600px;
+  width: 900px;
 }
 
 input {
@@ -99,6 +128,13 @@ footer {
   align-items: center;
 }
 
+
+
+
+
+
+
+
 @media (min-width: 300px) {
   body {
     display: flex;
@@ -131,13 +167,14 @@ footer {
   }
   #parkImage {
     height:  200px;
+    width:  300px;
   }
   h2 {
     margin-top: 20px;
     margin-bottom: 5px;
   }
   p {
-    width:  316px;
+    width:  300px;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
@@ -145,11 +182,18 @@ footer {
 
   #descriptionH2 {
     margin-top: 40px;
+    text-align: center;
   }
   footer {
     margin-top:  15px;
   }
 }
+
+
+
+
+
+
 
 @media (min-width: 700px) {
   body {
@@ -181,6 +225,127 @@ footer {
   }
   #parkImage {
     height:  450px;
+    width:  720px;
+  }
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 40px;
+    width:  700px;
+  }
+  p {
+    width:  720px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+
+  #descriptionH2 {
+    margin-top: 10px;
+    text-align: center;
+  }
+  footer {
+    margin-top:  15px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 1100px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    height: 500px;
+    width: 900px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin: auto;
+  }
+
+  #firstH1 {
+  
+  font-size: 150px;
+  display: flex;
+  margin-bottom: 10px;
+  font-family: "Cabin Sketch";
+  }
+
+.screenOne {
+
+  height: 500px;
+  width:  900px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+
+  }
+
+  #firstInput {
+  height:  70px;
+  width:  600px;
+  font-size: 50px;
+}
+
+#firstBtn {
+  height: 78px;
+  width: 200px;
+  font-size: 50px;
+}
+
+
+.screenTwo {
+
+  height: 148px;
+  width:  300px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  }
+
+  #secondInput {
+  height:  20px;
+  width:  140px;
+  font-size: 15px;
+}
+
+#secondBtn {
+  height: 25px;
+  width: 55px;
+  font-size: 15px;
+}
+
+
+  input {
+    height: 20px;
+    width: 200px;
+    font-size: 15px;
+    margin-top: 2px;
+  }
+  button {
+    height: 28px;
+    width: 70px;
+    font-size: 15px;
+    padding-bottom: 2px;
+  }
+  #parkImage {
+    height:  500px;
   }
   h2 {
     margin-top: 20px;
@@ -188,7 +353,7 @@ footer {
     font-size: 40px;
   }
   p {
-    width:  675px;
+    width:  50%;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;

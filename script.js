@@ -4,20 +4,27 @@ const apiKey = "6XXFeplxHFNsohc79vCep4HHyd10N4ARh557F2ep"
 
 let inputBar = document.querySelector("input");
 let btn = document.querySelector("button");
-let mainHeader = document.querySelector("header");
-// document.addEventListener('DOMContentLoaded', () => {
-	
+let bodyHeader = document.querySelector("header");
+let initialImage = document.querySelector("#parkImage");
+ document.addEventListener('DOMContentLoaded', () => {
+	//document.querySelector(".screenTwo").style.hidden = true;
+	document.querySelector(".screenTwo").style.visibility = "hidden";
+	document.querySelector("#parkImage").hidden = true;
 
-// })
+ })
 
 
 
 btn.addEventListener("click", () => {
+	
+	document.querySelector(".screenOne").style.display = "none";
+	document.querySelector(".screenTwo").style.visibility = "visible";
+	bodyHeader.style.height = "150px";
 	let userInput = document.querySelector("input").value;
 	let zipToLatLong = [];
 
 	// Converts the zipcode input by user to latitude and longitude values using mapquest API
-	fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=7eswptpG7eFsKM6dEKesj010foCEAYFQ&location=${userInput}`)
+	fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=7eswptpG7eFsKM6dEKesj010foCEAYFQ&location=${userInput}`)
 		.then((convertResponse) => {
 			return convertResponse.json();
 		})
@@ -49,7 +56,9 @@ btn.addEventListener("click", () => {
 					document.querySelector("#descriptionH2").append(closestPark.fullName);
 					document.querySelector("#descriptionP").append(closestPark.description);
 					document.querySelector("#parkImage").setAttribute("src", closestPark.images[0].url);
-					//document.querySelector("#parkImage").style.height = "500px";
+					document.querySelector("#parkImage").style.height = "500px";
+					//document.querySelector(".description").append(parkImage);
+					document.querySelector("#parkImage").hidden = false;
 
 					document.querySelector("#activitiesH2").innerText = "Available Park Activities";
 					const activities = closestPark.activities;
@@ -149,13 +158,29 @@ const nearbyParks = (parkList, input) => {
 }
 
 
+
+// const initialStyling = () => {
+// 	bodyHeader.style.width = "900px";
+// 	bodyHeader.style.height = "600px";
+// 	bodyHeader.style.alignContent = "center";
+// 	//initialImage.style.widgth = "0px";
+// 	document.querySelector("h1").style.fontSize = "150px";
+// 	inputBar.style.height = "70px";
+// 	inputBar.style.width = "450px";
+// 	inputBar.style.fontSize = "50px";
+// 	btn.style.height = "78px";
+// 	btn.style.width = "200px";
+// 	btn.style.fontSize = "50px";
+// }
+
+
 // Styles the search bar after a search is made
 const searchStyling = () => {
 
-	mainHeader.style.height = "100px";
-	mainHeader.style.width = "300px";
-	mainHeader.style.flexDirection = "column";
-	mainHeader.style.justifyContent = "flex-start";
+	bodyHeader.style.height = "100px";
+	bodyHeader.style.width = "300px";
+	bodyHeader.style.flexDirection = "column";
+	bodyHeader.style.justifyContent = "flex-start";
 	document.querySelector("h1").style.fontSize = "20px";
 	document.querySelector("h1").style.textAlign = "right";
 	inputBar.style.height = "15px";
