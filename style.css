@@ -1,4 +1,6 @@
-
+body {
+  background-color: antiquewhite;
+}
 
 .screenOne {
 
@@ -37,6 +39,9 @@ h1 {
   font-family: "Cabin Sketch";
 }
 
+h2 {
+  text-align: center;
+}
 
 header {
   display: flex;
@@ -152,19 +157,67 @@ footer {
     align-items: flex-start;
     margin: auto;
   }
-  h1 {
-    font-size: 40px;
+   #firstH1 {
+  
+  font-size: 50px;
+  display: flex;
+  margin-bottom: 10px;
+  font-family: "Cabin Sketch";
   }
-  input {
-    height: 15px;
-    width: 100px;
-    font-size: 10px;
+
+.screenOne {
+
+  height: 500px;
+  width:  300px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+
   }
-  button {
-    height: 20px;
-    width: 50px;
-    font-size: 10px;
+
+  #firstInput {
+  height: 20px;
+    width: 140px;
+    font-size: 15px;
   }
+
+#firstBtn {
+  height: 25px;
+  width: 58px;
+  font-size: 15px;
+}
+
+
+.screenTwo {
+
+  height: 120px;
+  width:  300px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+
+  }
+#secondH1 {
+  font-size: 40px;
+  display: flex;
+  margin-bottom: 10px;
+  font-family: "Cabin Sketch";
+  }
+
+  #secondInput {
+  height: 15px;
+  width:  100px;
+  font-size: 10px;
+}
+
+#secondBtn {
+  height: 20px;
+  width: 50px;
+  font-size: 10px;
+}
+ 
   #parkImage {
     height:  200px;
     width:  300px;
@@ -181,7 +234,7 @@ footer {
   }
 
   #descriptionH2 {
-    margin-top: 40px;
+    margin-top: 5px;
     text-align: center;
   }
   footer {
@@ -192,17 +245,14 @@ footer {
 
 
 
-
-
-
 @media (min-width: 700px) {
   body {
     display: flex;
     flex-direction: column;
   }
   header {
-    height: 140px;
-    width: 400px;
+    height: 500px;
+    width: 700px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -211,18 +261,38 @@ footer {
     align-items: flex-start;
     margin: auto;
   }
-  input {
-    height: 20px;
-    width: 200px;
-    font-size: 15px;
-    margin-top: 2px;
+
+  #firstH1 {
+  
+  font-size: 100px;
+  display: flex;
+  margin-bottom: 10px;
+  font-family: "Cabin Sketch";
   }
-  button {
-    height: 28px;
-    width: 70px;
-    font-size: 15px;
-    padding-bottom: 2px;
+
+.screenOne {
+
+  height: 500px;
+  width:  600px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+
   }
+
+  #firstInput {
+  height: 30px;
+  width: 200px;
+  font-size: 20px;
+  }
+
+#firstBtn {
+  height: 37px;
+  width: 75px;
+  font-size: 20px;
+}
+
   #parkImage {
     height:  450px;
     width:  720px;
@@ -327,7 +397,7 @@ footer {
 
 #secondBtn {
   height: 25px;
-  width: 55px;
+  width: 58px;
   font-size: 15px;
 }
 

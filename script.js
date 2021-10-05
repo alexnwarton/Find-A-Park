@@ -56,7 +56,7 @@ btn.addEventListener("click", () => {
 					document.querySelector("#descriptionH2").append(closestPark.fullName);
 					document.querySelector("#descriptionP").append(closestPark.description);
 					document.querySelector("#parkImage").setAttribute("src", closestPark.images[0].url);
-					document.querySelector("#parkImage").style.height = "500px";
+					//document.querySelector("#parkImage").style.height = "500px";
 					//document.querySelector(".description").append(parkImage);
 					document.querySelector("#parkImage").hidden = false;
 
