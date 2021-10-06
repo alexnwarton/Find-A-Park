@@ -114,10 +114,11 @@ main {
 }
 
 ul {
-  display:  flex;
+  display:  inline;
   flex-direction: column;
   align-content: center;
-
+  column-count: 2;
+  column-gap: 50px;
 }
 
 p {
