@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	document.querySelector("#parkImage").hidden = true;
 	document.querySelector(".slideshow").style.visibility = "hidden";
-	//document.querySelector(".next").hidden = true;
+	
 	// fetching data from national parks API based on park postal code
 	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
 		
@@ -50,24 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
 					let closestLat = parseFloat(closestPark.latitude);
 					let closestLong = parseFloat(closestPark.longitude);
 
-					const parkImages = closestPark.images
-					//console.log(parkImages);
-					
+					const parkImages = closestPark.images					
 
 					document.querySelector("#descriptionH2").append(closestPark.fullName);
-					document.querySelector("#descriptionP").append(closestPark.description);
-
-					// parkImages.forEach((image, i) => {
-					// 	document.querySelector("#parkImage").setAttribute("src", image.url);
-					// })
-					
+					document.querySelector("#descriptionP").append(closestPark.description);					
 
 					document.querySelector("#parkImage").setAttribute("src", closestPark.images[0].url);
-					//document.querySelector("#parkImage").style.height = "500px";
-					//document.querySelector(".description").append(parkImage);
+					
 					document.querySelector("#parkImage").hidden = false;
-					//document.querySelector(".previous").hidden = false;
+					
 					document.querySelector(".slideshow").style.visibility = "visible";	
+					document.querySelector(".previous").innerText = "<<";
 
 					let counter = 0;
 

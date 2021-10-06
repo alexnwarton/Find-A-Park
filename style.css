@@ -64,12 +64,16 @@ header {
   display: flex;
   align-items: center;
   padding: 20px;
+  font-weight: bolder;
+  font-size: 400%;
 }
 
 .previous {
   display: flex;
   align-items: center;
   padding: 20px;
+  font-weight: bolder;
+  font-size: 400%;
 }
 
 input {
@@ -155,7 +159,15 @@ footer {
   align-items: center;
 }
 
+a {
+  font-family: "Cabin Sketch";
+  color: forestgreen;
+}
 
+a:hover {
+  opacity: 0.5;
+  cursor:  pointer;
+}
 
 
 
@@ -180,7 +192,7 @@ footer {
     align-items: flex-start;
     margin: auto;
   }
-   #firstH1 {
+  #firstH1 {
   
   font-size: 50px;
   display: flex;
@@ -188,63 +200,50 @@ footer {
   font-family: "Cabin Sketch";
   }
 
-.screenOne {
+  .screenOne {
 
-  height: 500px;
-  width:  300px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
+    height: 500px;
+    width:  300px;
+    display: flex;
+    flex-wrap: wrap;
+   align-content: center;
+   justify-content: center;
 
   }
 
   #firstInput {
-  height: 20px;
+    height: 20px;
     width: 140px;
     font-size: 15px;
   }
 
-#firstBtn {
-  height: 25px;
-  width: 58px;
-  font-size: 15px;
-}
-
-
-.screenTwo {
-
-  height: 120px;
-  width:  300px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  justify-content: center;
-
-  }
-#secondH1 {
-  font-size: 40px;
-  display: flex;
-  margin-bottom: 10px;
-  font-family: "Cabin Sketch";
+  #firstBtn {
+    height: 25px;
+    width: 58px;
+    font-size: 15px;
   }
 
-  #secondInput {
-  height: 15px;
-  width:  100px;
-  font-size: 10px;
-}
-
-#secondBtn {
-  height: 20px;
-  width: 50px;
-  font-size: 10px;
-}
- 
   #parkImage {
     height:  200px;
-    width:  300px;
+    width:  250px;
   }
+
+  .next {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    font-weight: bolder;
+    font-size: 200%;
+  }
+
+  .previous {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    font-weight: bolder;
+    font-size: 200%;
+  }
+
   h2 {
     margin-top: 20px;
     margin-bottom: 5px;
@@ -256,6 +255,10 @@ footer {
     align-content: flex-start;
   }
 
+  ul {
+    width: 75%;
+    word-wrap: break-word;
+  }
   #descriptionH2 {
     margin-top: 5px;
     text-align: center;
@@ -318,9 +321,26 @@ footer {
 }
 
   #parkImage {
-    height:  450px;
-    width:  720px;
+    height:  75%;
+    width:  100%;
   }
+
+.next {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  font-weight: bolder;
+  font-size: 400%;
+}
+
+.previous {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  font-weight: bolder;
+  font-size: 400%;
+}
+
   h2 {
     margin-top: 20px;
     margin-bottom: 5px;
@@ -334,10 +354,20 @@ footer {
     align-content: flex-start;
   }
 
+  ul {
+    display:  inline;
+    flex-direction: column;
+    align-content: center;
+    column-count: 2;
+    column-gap: 50px;
+    word-wrap: normal;
+  }
+
   #descriptionH2 {
     margin-top: 10px;
     text-align: center;
   }
+
   footer {
     margin-top:  15px;
   }
@@ -401,6 +431,16 @@ footer {
   width: 200px;
   font-size: 50px;
 }
+ul {
+  display:  inline;
+  flex-direction: column;
+  align-content: center;
+  column-count: 2;
+  column-gap: 50px;
+  word-wrap: normal;
+  width:  auto;
+  font-size: 130%;
+}
 
 
   input {
@@ -428,6 +468,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+    font-size: 130%;
   }
 
   #descriptionH2 {
@@ -435,6 +476,7 @@ footer {
   }
   footer {
     margin-top:  15px;
+    font-size: 120%;
   }
 
 }
