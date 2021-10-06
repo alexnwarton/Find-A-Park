@@ -1,6 +1,7 @@
 const baseUrl = "https://developer.nps.gov/api/v1/parks";
 const apiKey = "6XXFeplxHFNsohc79vCep4HHyd10N4ARh557F2ep"
-
+const mapsUrl = "https://www.google.com/maps/embed/v1/directions?";
+const mapsApiKey = "AIzaSyDeHQ3QzJvKVaaxvDDK9qhr8R4ytU3q5X0";
 
 let inputBar = document.querySelector("input");
 let btn = document.querySelector("button");
@@ -11,6 +12,8 @@ let initialImage = document.querySelector("#parkImage");
 document.addEventListener('DOMContentLoaded', () => {
 	
 	document.querySelector("#parkImage").hidden = true;
+	document.querySelector(".previous").hidden = true;
+	document.querySelector(".next").hidden = true;
 	// fetching data from national parks API based on park postal code
 	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
 		
@@ -43,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			
 					let closestPark = nearbyParks(parkList, userInput);
+					let closestLat = parseFloat(closestPark.latitude);
+					let closestLong = parseFloat(closestPark.longitude);
 
 					const parkImages = closestPark.images
 					//console.log(parkImages);
@@ -52,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.querySelector("#descriptionP").append(closestPark.description);
 
 					// parkImages.forEach((image, i) => {
-					// 	parkImages.push(image[i].url);
+					// 	document.querySelector("#parkImage").setAttribute("src", image.url);
 					// })
 					
 
@@ -60,6 +65,37 @@ document.addEventListener('DOMContentLoaded', () => {
 					//document.querySelector("#parkImage").style.height = "500px";
 					//document.querySelector(".description").append(parkImage);
 					document.querySelector("#parkImage").hidden = false;
+					document.querySelector(".previous").hidden = false;
+					document.querySelector(".next").hidden = false;	
+
+					let counter = 0;
+
+					const next = () => {
+						let slider = document.querySelector("#parkImage");
+						if (counter >= parkImages.length - 1){
+							counter = 0;
+						}
+						else {
+							counter++;
+							console.log(counter);
+						}
+						slider.setAttribute("src", parkImages[counter].url);
+						console.log(slider);
+					}
+					 document.querySelector(".next").onclick = next;
+
+					const previous = () => {
+						let slider = document.querySelector("#parkImage");
+							counter--;
+
+						if(counter < 0) {
+							counter = parkImages.length - 1;
+						}
+						slider.setAttribute("src", parkImages[counter].url);
+						
+					}
+					document.querySelector(".previous").onclick = previous;
+
 
 					document.querySelector("#activitiesH2").innerText = "Available Park Activities";
 					const activities = closestPark.activities;
@@ -72,8 +108,20 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.querySelector("#weatherH2").innerText = "Weather Information";
 					document.querySelector("#weatherP").append(closestPark.weatherInfo);
 
-					document.querySelector("a").setAttribute("href", closestPark.url);
-					document.querySelector("a").innerText = "Learn more about this park";
+					document.querySelector("#footer").setAttribute("href", closestPark.url);
+					document.querySelector("#footer").innerText = "Learn more about this park";
+
+
+					// fetch(`${mapsUrl}origin=${userInput}&destination=${closestLat}${closestLong}&key=${mapsApiKey}`)
+					// 	.then((mapsResponse) => {
+					// 		return mapsResponse.json();
+					// 	})
+					// 	.then((mapsJson) => {
+					// 		let embeddedMap = document.querySelector("iframe");
+					// 		embeddedMap.setAttribute("src", mapsJson);
+					// 	})
+
+
 					
 			
 				})
@@ -87,9 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		.catch((error) => {
 			console.log(`Error:  {error}`);
 		})
-
-	
-	
 	
 
 })
@@ -177,3 +222,4 @@ const headerStyling = () => {
 	bodyHeader.style.width = "300px";
 	bodyHeader.style.alignContent = "center"
 }
+
