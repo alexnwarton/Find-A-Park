@@ -1,6 +1,6 @@
 const baseUrl = "https://developer.nps.gov/api/v1/parks";
-const apiKey = config.natParks;
-const mapquestApi = config.mapquest;
+const apiKey = "6XXFeplxHFNsohc79vCep4HHyd10N4ARh557F2ep";
+const mapquestApi = "7eswptpG7eFsKM6dEKesj010foCEAYFQ";
 const mapsUrl = "https://www.google.com/maps/embed/v1/directions?";
 const mapsApiKey = config.googleMaps;
 
