@@ -1,5 +1,6 @@
 body {
   background-color: antiquewhite;
+  width:  100%;
 }
 
 .screenOne {
@@ -55,10 +56,21 @@ header {
 
 .slideshow {
   display:  flex;
+  width: 75%;
+  justify-content: center;
 }
 
+.next {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
 
-
+.previous {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
 
 input {
   display: flex;

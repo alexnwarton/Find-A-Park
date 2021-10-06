@@ -1,7 +1,8 @@
 const baseUrl = "https://developer.nps.gov/api/v1/parks";
-const apiKey = "6XXFeplxHFNsohc79vCep4HHyd10N4ARh557F2ep"
+const apiKey = config.natParks;
+const mapquestApi = config.mapquest;
 const mapsUrl = "https://www.google.com/maps/embed/v1/directions?";
-const mapsApiKey = "AIzaSyDeHQ3QzJvKVaaxvDDK9qhr8R4ytU3q5X0";
+const mapsApiKey = config.googleMaps;
 
 let inputBar = document.querySelector("input");
 let btn = document.querySelector("button");
@@ -12,8 +13,8 @@ let initialImage = document.querySelector("#parkImage");
 document.addEventListener('DOMContentLoaded', () => {
 	
 	document.querySelector("#parkImage").hidden = true;
-	document.querySelector(".previous").hidden = true;
-	document.querySelector(".next").hidden = true;
+	document.querySelector(".slideshow").style.visibility = "hidden";
+	//document.querySelector(".next").hidden = true;
 	// fetching data from national parks API based on park postal code
 	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
 		
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let zipToLatLong = [];
 
 			// Converts the zipcode input by user to latitude and longitude values using mapquest API
-			fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=7eswptpG7eFsKM6dEKesj010foCEAYFQ&location=${userInput}`)
+			fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=${mapquestApi}&location=${userInput}`)
 				.then((convertResponse) => {
 					return convertResponse.json();
 			})
@@ -65,11 +66,22 @@ document.addEventListener('DOMContentLoaded', () => {
 					//document.querySelector("#parkImage").style.height = "500px";
 					//document.querySelector(".description").append(parkImage);
 					document.querySelector("#parkImage").hidden = false;
-					document.querySelector(".previous").hidden = false;
-					document.querySelector(".next").hidden = false;	
+					//document.querySelector(".previous").hidden = false;
+					document.querySelector(".slideshow").style.visibility = "visible";	
 
 					let counter = 0;
 
+					const previous = () => {
+						let slider = document.querySelector("#parkImage");
+							counter--;
+
+						if(counter < 0) {
+							counter = parkImages.length - 1;
+						}
+						slider.setAttribute("src", parkImages[counter].url);
+						
+					}
+					document.querySelector(".previous").onclick = previous;
 					const next = () => {
 						let slider = document.querySelector("#parkImage");
 						if (counter >= parkImages.length - 1){
@@ -84,17 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 					 document.querySelector(".next").onclick = next;
 
-					const previous = () => {
-						let slider = document.querySelector("#parkImage");
-							counter--;
-
-						if(counter < 0) {
-							counter = parkImages.length - 1;
-						}
-						slider.setAttribute("src", parkImages[counter].url);
-						
-					}
-					document.querySelector(".previous").onclick = previous;
+					
 
 
 					document.querySelector("#activitiesH2").innerText = "Available Park Activities";
