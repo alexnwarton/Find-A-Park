@@ -4,57 +4,58 @@ const apiKey = "6XXFeplxHFNsohc79vCep4HHyd10N4ARh557F2ep"
 
 let inputBar = document.querySelector("input");
 let btn = document.querySelector("button");
+
 let bodyHeader = document.querySelector("header");
 let initialImage = document.querySelector("#parkImage");
- document.addEventListener('DOMContentLoaded', () => {
-	//document.querySelector(".screenTwo").style.hidden = true;
-	document.querySelector(".screenTwo").style.visibility = "hidden";
-	document.querySelector("#parkImage").hidden = true;
 
- })
-
-
-
-btn.addEventListener("click", () => {
+document.addEventListener('DOMContentLoaded', () => {
 	
-	document.querySelector(".screenOne").style.display = "none";
-	document.querySelector(".screenTwo").style.visibility = "visible";
-	bodyHeader.style.height = "150px";
-	let userInput = document.querySelector("input").value;
-	let zipToLatLong = [];
-
-	// Converts the zipcode input by user to latitude and longitude values using mapquest API
-	fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=7eswptpG7eFsKM6dEKesj010foCEAYFQ&location=${userInput}`)
-		.then((convertResponse) => {
-			return convertResponse.json();
+	document.querySelector("#parkImage").hidden = true;
+	// fetching data from national parks API based on park postal code
+	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
+		
+		.then((response) => {
+			return response.json();
 		})
 		.then((jsonResponse) => {
 			
-			zipToLatLong.push(jsonResponse.results[0].locations[0].latLng.lat);
-			zipToLatLong.push(jsonResponse.results[0].locations[0].latLng.lng);
-			userInput = zipToLatLong;	
-
-			// fetching data from national parks API based on park postal code
-			fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
-		
-				.then((response) => {
-				return response.json();
-				})
-				.then((jsonResponse) => {
+			let parkList = findParks(jsonResponse);
 			
-					let parkList = findParks(jsonResponse);
+
+			btn.addEventListener("click", () => {
+
+			headerStyling();
+			
+			
+			let userInput = document.querySelector("input").value;
+			let zipToLatLong = [];
+
+			// Converts the zipcode input by user to latitude and longitude values using mapquest API
+			fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=7eswptpG7eFsKM6dEKesj010foCEAYFQ&location=${userInput}`)
+				.then((convertResponse) => {
+					return convertResponse.json();
+			})
+			.then((jsonResponseC) => {
+			
+				zipToLatLong.push(jsonResponseC.results[0].locations[0].latLng.lat);
+				zipToLatLong.push(jsonResponseC.results[0].locations[0].latLng.lng);
+				userInput = zipToLatLong;	
+
 			
 					let closestPark = nearbyParks(parkList, userInput);
 
-					//const parkImages = closestPark.images
-
-					// closestPark.forEach((image, i) => {
-					// 	parkImages.push(image[i].url);
-					// })
-					// console.log(parkImages);
+					const parkImages = closestPark.images
+					//console.log(parkImages);
+					
 
 					document.querySelector("#descriptionH2").append(closestPark.fullName);
 					document.querySelector("#descriptionP").append(closestPark.description);
+
+					// parkImages.forEach((image, i) => {
+					// 	parkImages.push(image[i].url);
+					// })
+					
+
 					document.querySelector("#parkImage").setAttribute("src", closestPark.images[0].url);
 					//document.querySelector("#parkImage").style.height = "500px";
 					//document.querySelector(".description").append(parkImage);
@@ -73,24 +74,28 @@ btn.addEventListener("click", () => {
 
 					document.querySelector("a").setAttribute("href", closestPark.url);
 					document.querySelector("a").innerText = "Learn more about this park";
+					
 			
 				})
-
 				.catch((error) => {
 					console.log(`Error:  {error}`);
 				})
 				
+	})
+
 		})
 		.catch((error) => {
-					console.log(`Error:  {error}`);
-				})
-			
-	
+			console.log(`Error:  {error}`);
+		})
 
+	
 	
 	
 
 })
+
+
+
 
 // Searching through the list of all national sites to return national parks
 const findParks = (siteInfo) => {
@@ -158,36 +163,17 @@ const nearbyParks = (parkList, input) => {
 }
 
 
+const headerStyling = () => {
+	document.querySelector("h1").style.fontSize = "40px";
+	inputBar.style.height = "20px";
+	inputBar.style.width = "140px";
+	inputBar.style.fontSize = "15px";
 
-// const initialStyling = () => {
-// 	bodyHeader.style.width = "900px";
-// 	bodyHeader.style.height = "600px";
-// 	bodyHeader.style.alignContent = "center";
-// 	//initialImage.style.widgth = "0px";
-// 	document.querySelector("h1").style.fontSize = "150px";
-// 	inputBar.style.height = "70px";
-// 	inputBar.style.width = "450px";
-// 	inputBar.style.fontSize = "50px";
-// 	btn.style.height = "78px";
-// 	btn.style.width = "200px";
-// 	btn.style.fontSize = "50px";
-// }
+	btn.style.height = "25px";
+	btn.style.width = "58px";
+  	btn.style.fontSize = "15px";
 
-
-// Styles the search bar after a search is made
-const searchStyling = () => {
-
-	bodyHeader.style.height = "100px";
+	bodyHeader.style.height = "150px";
 	bodyHeader.style.width = "300px";
-	bodyHeader.style.flexDirection = "column";
-	bodyHeader.style.justifyContent = "flex-start";
-	document.querySelector("h1").style.fontSize = "20px";
-	document.querySelector("h1").style.textAlign = "right";
-	inputBar.style.height = "15px";
-	inputBar.style.width = "100px";
-	inputBar.style.fontSize = "10px";
-	btn.style.height = "20px";
-	btn.style.width = "50px";
-	btn.style.fontSize = "10px";
-
+	bodyHeader.style.alignContent = "center"
 }
