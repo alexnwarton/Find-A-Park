@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					let closestLat = parseFloat(closestPark.latitude);
 					let closestLong = parseFloat(closestPark.longitude);
 
+					//console.log(fiveClosestParks(parkList, userInput));
+
 					const parkImages = closestPark.images					
 
 					document.querySelector("#descriptionH2").append(closestPark.fullName);
@@ -115,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					// 		embeddedMap.setAttribute("src", mapsJson);
 					// 	})
 
-					//console.log(fiveClosestParks(parkList, userInput));
+					
 
 					
 			
@@ -218,35 +220,33 @@ const headerStyling = () => {
 	bodyHeader.style.alignContent = "center"
 }
 
-//Finds the 5 closest parks based on the user input
-const fiveClosestParks = (parkList, input) => {
+// //Finds the 5 closest parks based on the user input
+// const fiveClosestParks = (parkList, input) => {
  
- document.querySelector("input").value = "";
- document.querySelector("#descriptionP").innerHTML = "";
- document.querySelector("#descriptionH2").innerHTML = "";
- document.querySelector("#activitiesH2").innerHTML = "";
- document.querySelector("ul").innerHTML = "";
- document.querySelector("#weatherH2").innerHTML = "";
- document.querySelector("#weatherP").innerHTML = "";
- document.querySelector("a").innerHTML = "";
+//  // document.querySelector("input").value = "";
+//  // document.querySelector("#descriptionP").innerHTML = "";
+//  // document.querySelector("#descriptionH2").innerHTML = "";
+//  // document.querySelector("#activitiesH2").innerHTML = "";
+//  // document.querySelector("ul").innerHTML = "";
+//  // document.querySelector("#weatherH2").innerHTML = "";
+//  // document.querySelector("#weatherP").innerHTML = "";
+//  // document.querySelector("a").innerHTML = "";
 
- let natParksNear = [];
- let minDistance = calcDistance(input, [parseFloat(parkList[0].latitude), parseFloat(parkList[0].longitude)]);
- let parkLat;
- let parkLong;
- let distance;
- let counter = 0;
+//  //let parkDistances = [];
+//  //let minDistance = calcDistance(input, [parseFloat(parkList[0].latitude), parseFloat(parkList[0].longitude)]);
+//  let parkLat;
+//  let parkLong;
+//  let distance;
+//  let counter = 0;
  
- parkList.forEach((park, i) => {
- 	parkLat = parseFloat(park.latitude);
- 	parkLong = parseFloat(park.longitude);
- 	distance = calcDistance(input, [parkLat, parkLong]);
- 
- 	if(distance < minDistance && counter < 5) {
- 		minDistance = distance;
- 		natParksNear.push(park);
- 	}
- })
+//  parkList.forEach((park, i) => {
+// 	calculatedDistance = calcDistance(input, [parseFloat(park.latitude), parseFloat(park.longitude)]);
+// 	park.distance = calculatedDistance;
+//  })
+//  	const mappedParks = parkList.map((distance, i) => {
+//  		console.log(mappedParks);
+//  	})
  	
- 	return natParksNear;
-}
+ 	
+//  	return parkList;
+// }
