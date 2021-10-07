@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.querySelector(".slideshow").style.visibility = "hidden";
 	
 	// Fetches data from national parks API based on park postal code
-	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`, {}, 2000000)
+	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
 		
 		.then((response) => {
 			return response.json();
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				let zipToLatLong = [];
 
 				// Converts the zipcode input by user to latitude and longitude values using mapquest API
-				fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=${mapquestApi}&location=${userInput}`, {}, 2000000)
+				fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=${mapquestApi}&location=${userInput}`)
 					.then((convertResponse) => {
 
 						return convertResponse.json();
@@ -239,43 +239,33 @@ const fiveClosestParks = (parkList, input) => {
  // document.querySelector("#weatherP").innerHTML = "";
  // document.querySelector("a").innerHTML = "";
 
- let minDistances = [];
  let minIndices = [];
- //let minDistance = calcDistance(input, [parseFloat(parkList[0].latitude), parseFloat(parkList[0].longitude)]);
- //let parkLat;
- //let parkLong;
- //let distance;
- //let counter = 0;
+ let fiveParks = [];
  
- let minDistance; 
- let minIndex;
  // Finds the distances for each park and add it to each park object
  parkList.forEach((park, i) => {
 	calculatedDistance = calcDistance(input, [parseFloat(park.latitude), parseFloat(park.longitude)]);
 	park.distance = calculatedDistance;
- 	
- // Iterate through the parkList and find the minimum distance value (Math.min)
- // Find the minimum distance and push it to the parkDistances array
- //  park with the minimum distance from the parkList
+ })
+ // Iterate through the parkList and find the minimum distance value
+ // Find the minimum distance and push it to the minDistances array
 
- 	for(let i = 0; i < 5; i++) {
- 		
- 		minDistance = Math.min(park.distance)
-		if(parkList[i].distance === minDistance) {
-			minDistance;
-			minDistances.push(parkList[i]);
+
+ for(let i = 0; i < 5; i++) {
+ 	let minDistance = null; 
+ 	let minIndex = null;
+ 	parkList.forEach((park, i) => {
+		if(minDistance === null) {
+			minDistance = park.distance;
+			minIndex = i;
+		}
+		else if(park.distance < minDistance) {
+			minDistance = park.distance;
+			fiveParks.push(park);
 			minIndex = i;
 			minIndices.push(i);
 		}
-	}
- })
- 	
-
-
- 	
- 	return parkList;
+	})
+ }
+ return fiveParks;
 }
-
-// const compare = (a, b) => {
-// 		return a.distance - b.distance;
-// }
