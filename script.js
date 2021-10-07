@@ -227,33 +227,37 @@ const headerStyling = () => {
 	bodyHeader.style.alignContent = "center"
 }
 
-// //Finds the 5 closest parks based on the user input
-// const fiveClosestParks = (parkList, input) => {
+//Finds the 5 closest parks based on the user input
+const fiveClosestParks = (parkList, input) => {
  
-//  // document.querySelector("input").value = "";
-//  // document.querySelector("#descriptionP").innerHTML = "";
-//  // document.querySelector("#descriptionH2").innerHTML = "";
-//  // document.querySelector("#activitiesH2").innerHTML = "";
-//  // document.querySelector("ul").innerHTML = "";
-//  // document.querySelector("#weatherH2").innerHTML = "";
-//  // document.querySelector("#weatherP").innerHTML = "";
-//  // document.querySelector("a").innerHTML = "";
+ // document.querySelector("input").value = "";
+ // document.querySelector("#descriptionP").innerHTML = "";
+ // document.querySelector("#descriptionH2").innerHTML = "";
+ // document.querySelector("#activitiesH2").innerHTML = "";
+ // document.querySelector("ul").innerHTML = "";
+ // document.querySelector("#weatherH2").innerHTML = "";
+ // document.querySelector("#weatherP").innerHTML = "";
+ // document.querySelector("a").innerHTML = "";
 
-//  //let parkDistances = [];
-//  //let minDistance = calcDistance(input, [parseFloat(parkList[0].latitude), parseFloat(parkList[0].longitude)]);
-//  let parkLat;
-//  let parkLong;
-//  let distance;
-//  let counter = 0;
+ //let parkDistances = [];
+ //let minDistance = calcDistance(input, [parseFloat(parkList[0].latitude), parseFloat(parkList[0].longitude)]);
+ let parkLat;
+ let parkLong;
+ let distance;
+ let counter = 0;
  
-//  parkList.forEach((park, i) => {
-// 	calculatedDistance = calcDistance(input, [parseFloat(park.latitude), parseFloat(park.longitude)]);
-// 	park.distance = calculatedDistance;
-//  })
-//  	const mappedParks = parkList.map((distance, i) => {
-//  		console.log(mappedParks);
-//  	})
+ parkList.forEach((park, i) => {
+	calculatedDistance = calcDistance(input, [parseFloat(park.latitude), parseFloat(park.longitude)]);
+	park.distance = calculatedDistance;
+ })
+ 	const sortedParks = parkList.sort((compare) => {
+ 		console.log(mappedParks);
+ 	})
  	
  	
-//  	return parkList;
-// }
+ 	return parkList;
+}
+
+const compare = (a, b) => {
+		return a.distance - b.distance;
+}
