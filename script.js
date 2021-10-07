@@ -10,12 +10,14 @@ let btn = document.querySelector("button");
 let bodyHeader = document.querySelector("header");
 let initialImage = document.querySelector("#parkImage");
 
+// Adds an event listener for when the DOM has loaded
 document.addEventListener('DOMContentLoaded', () => {
 	
+	// Hides the #parkImage and .slideshow elements as soon as the DOM content has loaded
 	document.querySelector("#parkImage").hidden = true;
 	document.querySelector(".slideshow").style.visibility = "hidden";
 	
-	// fetching data from national parks API based on park postal code
+	// Fetches data from national parks API based on park postal code
 	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
 		
 		.then((response) => {
@@ -25,27 +27,30 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 			let parkList = findParks(jsonResponse);
 			
-
+			// Adds an event listener for when the button is clicked
 			btn.addEventListener("click", () => {
 
-			headerStyling();
+				// Styles the header as soon as the button is clicked
+				headerStyling();
 			
-			
-			let userInput = document.querySelector("input").value;
-			let zipToLatLong = [];
+				// Obtains the user input
+				let userInput = document.querySelector("input").value;
+				let zipToLatLong = [];
 
-			// Converts the zipcode input by user to latitude and longitude values using mapquest API
-			fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=${mapquestApi}&location=${userInput}`)
-				.then((convertResponse) => {
-					return convertResponse.json();
-			})
-			.then((jsonResponseC) => {
-			
-				zipToLatLong.push(jsonResponseC.results[0].locations[0].latLng.lat);
-				zipToLatLong.push(jsonResponseC.results[0].locations[0].latLng.lng);
-				userInput = zipToLatLong;	
+				// Converts the zipcode input by user to latitude and longitude values using mapquest API
+				fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=${mapquestApi}&location=${userInput}`)
+					.then((convertResponse) => {
 
+						return convertResponse.json();
+				})
+				.then((jsonResponseC) => {
 			
+					// Stores the user location data as latitude and longitude values
+					zipToLatLong.push(jsonResponseC.results[0].locations[0].latLng.lat);
+					zipToLatLong.push(jsonResponseC.results[0].locations[0].latLng.lng);
+					userInput = zipToLatLong;	
+
+					// Finds the closest national park and the values of its latitude and longitude
 					let closestPark = nearbyParks(parkList, userInput);
 					let closestLat = parseFloat(closestPark.latitude);
 					let closestLong = parseFloat(closestPark.longitude);
@@ -54,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					const parkImages = closestPark.images					
 
+					// Appends data from the closest park to the DOM
 					document.querySelector("#descriptionH2").append(closestPark.fullName);
 					document.querySelector("#descriptionP").append(closestPark.description);					
 
@@ -64,6 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.querySelector(".slideshow").style.visibility = "visible";	
 					document.querySelector(".previous").innerText = "<<";
 
+
+					// Creates functions for the previous and next buttons to display a slideshow of multiple park images when clicked
 					let counter = 0;
 
 					const previous = () => {
@@ -77,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						
 					}
 					document.querySelector(".previous").onclick = previous;
+
 					const next = () => {
 						let slider = document.querySelector("#parkImage");
 						if (counter >= parkImages.length - 1){
@@ -90,9 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 					 document.querySelector(".next").onclick = next;
 
-					
-
-
+					// Appends all park activities to the DOM as an unordered list
 					document.querySelector("#activitiesH2").innerText = "Available Park Activities";
 					const activities = closestPark.activities;
 					activities.forEach((item, i) => {
@@ -101,9 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
 						document.querySelector("ul").append(activity);
 					})
 
+					// Appends weather information to the DOM
 					document.querySelector("#weatherH2").innerText = "Weather Information";
 					document.querySelector("#weatherP").append(closestPark.weatherInfo);
 
+					// Appends the link to the national park website to the DOM
 					document.querySelector("#footer").setAttribute("href", closestPark.url);
 					document.querySelector("#footer").innerText = "Learn more about this park";
 
@@ -115,13 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
 					// 	.then((mapsJson) => {
 					// 		let embeddedMap = document.querySelector("iframe");
 					// 		embeddedMap.setAttribute("src", mapsJson);
-					// 	})
-
-					
-
-					
+					// 	})									
 			
 				})
+				// Displays an error if data cannot be fetched from the mapquest API
 				.catch((error) => {
 					console.log(`Error:  {error}`);
 				})
@@ -129,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 
 		})
+		// Displays an error if data cannot be fetched from the national parks API
 		.catch((error) => {
 			console.log(`Error:  {error}`);
 		})
@@ -139,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Searching through the list of all national sites to return national parks
+// Searches through the list of all national sites to return a list of national parks
 const findParks = (siteInfo) => {
 	const natParks = [];
 			//const natMonuments = [];
@@ -166,13 +173,13 @@ const calcDistance = (park1, park2) => {
 
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	let distance = radius * c;
-	//convert distance from meters to miles
+	// Converts distance from meters to miles
 	distance = distance * 0.621371;
 	return distance;
 
 }
 
-//Finds the closest park based on the user input
+// Finds the closest park based on the user input
 const nearbyParks = (parkList, input) => {
  
  document.querySelector("input").value = "";
@@ -204,7 +211,7 @@ const nearbyParks = (parkList, input) => {
  	return natParksNear;
 }
 
-
+// Changes the styling of the header elements
 const headerStyling = () => {
 	document.querySelector("h1").style.fontSize = "40px";
 	inputBar.style.height = "20px";
