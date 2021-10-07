@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.querySelector(".slideshow").style.visibility = "hidden";
 	
 	// Fetches data from national parks API based on park postal code
-	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
+	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`, {}, 2000000)
 		
 		.then((response) => {
 			return response.json();
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				let zipToLatLong = [];
 
 				// Converts the zipcode input by user to latitude and longitude values using mapquest API
-				fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=${mapquestApi}&location=${userInput}`)
+				fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=${mapquestApi}&location=${userInput}`, {}, 2000000)
 					.then((convertResponse) => {
 
 						return convertResponse.json();
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					let closestLat = parseFloat(closestPark.latitude);
 					let closestLong = parseFloat(closestPark.longitude);
 
-					//console.log(fiveClosestParks(parkList, userInput));
+					console.log(fiveClosestParks(parkList, userInput));
 
 					const parkImages = closestPark.images					
 
@@ -239,25 +239,43 @@ const fiveClosestParks = (parkList, input) => {
  // document.querySelector("#weatherP").innerHTML = "";
  // document.querySelector("a").innerHTML = "";
 
- //let parkDistances = [];
+ let minDistances = [];
+ let minIndices = [];
  //let minDistance = calcDistance(input, [parseFloat(parkList[0].latitude), parseFloat(parkList[0].longitude)]);
- let parkLat;
- let parkLong;
- let distance;
- let counter = 0;
+ //let parkLat;
+ //let parkLong;
+ //let distance;
+ //let counter = 0;
  
+ let minDistance; 
+ let minIndex;
+ // Finds the distances for each park and add it to each park object
  parkList.forEach((park, i) => {
 	calculatedDistance = calcDistance(input, [parseFloat(park.latitude), parseFloat(park.longitude)]);
 	park.distance = calculatedDistance;
- })
- 	const sortedParks = parkList.sort((compare) => {
- 		console.log(mappedParks);
- 	})
  	
+ // Iterate through the parkList and find the minimum distance value (Math.min)
+ // Find the minimum distance and push it to the parkDistances array
+ //  park with the minimum distance from the parkList
+
+ 	for(let i = 0; i < 5; i++) {
+ 		
+ 		minDistance = Math.min(park.distance)
+		if(parkList[i].distance === minDistance) {
+			minDistance;
+			minDistances.push(parkList[i]);
+			minIndex = i;
+			minIndices.push(i);
+		}
+	}
+ })
+ 	
+
+
  	
  	return parkList;
 }
 
-const compare = (a, b) => {
-		return a.distance - b.distance;
-}
+// const compare = (a, b) => {
+// 		return a.distance - b.distance;
+// }
