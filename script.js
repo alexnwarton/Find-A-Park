@@ -2,7 +2,7 @@ const baseUrl = "https://developer.nps.gov/api/v1/parks";
 const apiKey = "6XXFeplxHFNsohc79vCep4HHyd10N4ARh557F2ep";
 const mapquestApi = "7eswptpG7eFsKM6dEKesj010foCEAYFQ";
 const mapsUrl = "https://www.google.com/maps/embed/v1/directions?";
-const mapsApiKey = config.googleMaps;
+//const mapsApiKey = config.googleMaps;
 
 let inputBar = document.querySelector("input");
 let btn = document.querySelector("button");
@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
 							console.log(counter);
 						}
 						slider.setAttribute("src", parkImages[counter].url);
-						console.log(slider);
 					}
 					 document.querySelector(".next").onclick = next;
 
@@ -116,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					// 		embeddedMap.setAttribute("src", mapsJson);
 					// 	})
 
+					//console.log(fiveClosestParks(parkList, userInput));
 
 					
 			
@@ -218,3 +218,35 @@ const headerStyling = () => {
 	bodyHeader.style.alignContent = "center"
 }
 
+//Finds the 5 closest parks based on the user input
+const fiveClosestParks = (parkList, input) => {
+ 
+ document.querySelector("input").value = "";
+ document.querySelector("#descriptionP").innerHTML = "";
+ document.querySelector("#descriptionH2").innerHTML = "";
+ document.querySelector("#activitiesH2").innerHTML = "";
+ document.querySelector("ul").innerHTML = "";
+ document.querySelector("#weatherH2").innerHTML = "";
+ document.querySelector("#weatherP").innerHTML = "";
+ document.querySelector("a").innerHTML = "";
+
+ let natParksNear = [];
+ let minDistance = calcDistance(input, [parseFloat(parkList[0].latitude), parseFloat(parkList[0].longitude)]);
+ let parkLat;
+ let parkLong;
+ let distance;
+ let counter = 0;
+ 
+ parkList.forEach((park, i) => {
+ 	parkLat = parseFloat(park.latitude);
+ 	parkLong = parseFloat(park.longitude);
+ 	distance = calcDistance(input, [parkLat, parkLong]);
+ 
+ 	if(distance < minDistance && counter < 5) {
+ 		minDistance = distance;
+ 		natParksNear.push(park);
+ 	}
+ })
+ 	
+ 	return natParksNear;
+}
