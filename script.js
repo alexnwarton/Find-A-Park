@@ -252,20 +252,28 @@ const fiveClosestParks = (parkList, input) => {
 
 
  for(let i = 0; i < 5; i++) {
- 	let minDistance = null; 
  	let minIndex = null;
- 	parkList.forEach((park, i) => {
-		if(minDistance === null) {
-			minDistance = park.distance;
-			minIndex = i;
+ 	let minPark = null;
+ 	parkList.forEach((park, j) => {
+		if(minPark === null && minIndices.includes(j) === false) {
+			minIndex = j;
+			minPark = park;
 		}
-		else if(park.distance < minDistance) {
-			minDistance = park.distance;
-			fiveParks.push(park);
-			minIndex = i;
-			minIndices.push(i);
+		else if(park.distance < minPark.distance && minIndices.includes(j) === false) {
+			minIndex = j;
+			minPark = park;
+			
 		}
 	})
+	fiveParks.push(minPark);
+	minIndices.push(minIndex);	
  }
  return fiveParks;
 }
+
+
+// const populateDropDown = () => {
+// 	const dropDownElem = 
+
+
+// }
