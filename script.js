@@ -263,8 +263,8 @@ const fiveClosestParks = (parkList, input) => {
 }
 
 
-// const populateDropDown = () => {
-// 	const dropDownElem = 
+const populateDropDown = () => {
+	const dropDownElem = document.querySelector("#nextParks")
 
 
-// }
+}
