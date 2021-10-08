@@ -121,6 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					document.querySelector("#otherParks").innerText = "Other Nearby Parks";
 
+					// const pickPark = (chosenPark) => {
+						
+					// 	parkList.forEach((park, i) => {
+					// 		if(park.fullName === chosenPark){
+					// 		loadData(park);
+					// 		}
+					// 	})
+	
+					// }
+					// document.querySelector("#topFive").onchange = pickPark;
+
 					// fetch(`${mapsUrl}origin=${userInput}&destination=${closestLat}${closestLong}&key=${mapsApiKey}`)
 					// 	.then((mapsResponse) => {
 					// 		return mapsResponse.json();
@@ -275,3 +286,76 @@ const populateDropDown = (fiveParks) => {
 		dropDownElem.add(option);
 	})
 }
+
+const loadData = (park) => {
+	document.querySelector("input").value = "";
+	document.querySelector("#descriptionP").innerHTML = "";
+	document.querySelector("#descriptionH2").innerHTML = "";
+	document.querySelector("#activitiesH2").innerHTML = "";
+	document.querySelector("ul").innerHTML = "";
+	document.querySelector("#weatherH2").innerHTML = "";
+	document.querySelector("#weatherP").innerHTML = "";
+	document.querySelector("a").innerHTML = "";
+
+	// Appends data from the closest park to the DOM
+					document.querySelector("#descriptionH2").append(park.fullName);
+					document.querySelector("#descriptionP").append(park.description);					
+
+					document.querySelector("#parkImage").setAttribute("src", park.images[0].url);
+					
+					document.querySelector("#parkImage").hidden = false;
+					
+					document.querySelector(".slideshow").style.visibility = "visible";	
+					document.querySelector("#topFive").style.visibility = "visible";
+					document.querySelector(".previous").innerText = "<<";
+
+
+					// Creates functions for the previous and next buttons to display a slideshow of multiple park images when clicked
+					let counter = 0;
+
+					const previous = () => {
+						let slider = document.querySelector("#parkImage");
+							counter--;
+
+						if(counter < 0) {
+							counter = parkImages.length - 1;
+						}
+						slider.setAttribute("src", parkImages[counter].url);
+						
+					}
+					document.querySelector(".previous").onclick = previous;
+
+					const next = () => {
+						let slider = document.querySelector("#parkImage");
+						if (counter >= parkImages.length - 1){
+							counter = 0;
+						}
+						else {
+							counter++;
+							console.log(counter);
+						}
+						slider.setAttribute("src", parkImages[counter].url);
+					}
+					 document.querySelector(".next").onclick = next;
+
+					// Appends all park activities to the DOM as an unordered list
+					document.querySelector("#activitiesH2").innerText = "Available Park Activities";
+					const activities = park.activities;
+					activities.forEach((item, i) => {
+						let activity = document.createElement("li");
+						activity.innerText = item.name;
+						document.querySelector("ul").append(activity);
+					})
+
+					// Appends weather information to the DOM
+					document.querySelector("#weatherH2").innerText = "Weather Information";
+					document.querySelector("#weatherP").append(park.weatherInfo);
+
+					// Appends the link to the national park website to the DOM
+					document.querySelector("#footer").setAttribute("href", park.url);
+					document.querySelector("#footer").innerText = "Learn more about this park";
+
+					document.querySelector("#otherParks").innerText = "Other Nearby Parks";
+
+}
+
