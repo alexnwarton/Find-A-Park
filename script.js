@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Hides the #parkImage and .slideshow elements as soon as the DOM content has loaded
 	document.querySelector("#parkImage").hidden = true;
 	document.querySelector(".slideshow").style.visibility = "hidden";
+	document.querySelector("#topFive").style.visibility = "hidden";
 	
 	// Fetches data from national parks API based on park postal code
 	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
@@ -55,7 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					let closestLat = parseFloat(closestPark.latitude);
 					let closestLong = parseFloat(closestPark.longitude);
 
-					console.log(fiveClosestParks(parkList, userInput));
+					let fiveParks = fiveClosestParks(parkList, userInput);
+					populateDropDown(fiveParks);
 
 					const parkImages = closestPark.images					
 
@@ -68,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.querySelector("#parkImage").hidden = false;
 					
 					document.querySelector(".slideshow").style.visibility = "visible";	
+					document.querySelector("#topFive").style.visibility = "visible";
 					document.querySelector(".previous").innerText = "<<";
 
 
@@ -116,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.querySelector("#footer").setAttribute("href", closestPark.url);
 					document.querySelector("#footer").innerText = "Learn more about this park";
 
+					document.querySelector("#otherParks").innerText = "Other Nearby Parks";
 
 					// fetch(`${mapsUrl}origin=${userInput}&destination=${closestLat}${closestLong}&key=${mapsApiKey}`)
 					// 	.then((mapsResponse) => {
@@ -263,8 +267,11 @@ const fiveClosestParks = (parkList, input) => {
 }
 
 
-const populateDropDown = () => {
-	const dropDownElem = document.querySelector("#nextParks")
-
-
+const populateDropDown = (fiveParks) => {
+	const dropDownElem = document.querySelector("#topFive")
+	fiveParks.forEach((element, i) => {
+		let option = document.createElement("option");
+		option.text = element.fullName;
+		dropDownElem.add(option);
+	})
 }
