@@ -229,15 +229,6 @@ const headerStyling = () => {
 
 //Finds the 5 closest parks based on the user input
 const fiveClosestParks = (parkList, input) => {
- 
- // document.querySelector("input").value = "";
- // document.querySelector("#descriptionP").innerHTML = "";
- // document.querySelector("#descriptionH2").innerHTML = "";
- // document.querySelector("#activitiesH2").innerHTML = "";
- // document.querySelector("ul").innerHTML = "";
- // document.querySelector("#weatherH2").innerHTML = "";
- // document.querySelector("#weatherP").innerHTML = "";
- // document.querySelector("a").innerHTML = "";
 
  let minIndices = [];
  let fiveParks = [];
