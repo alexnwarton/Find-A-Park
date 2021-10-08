@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					let closestLong = parseFloat(closestPark.longitude);
 
 					let fiveParks = fiveClosestParks(parkList, userInput);
+					document.querySelector("#topFive").innerHTML = "";
 					populateDropDown(fiveParks);
 
 					const parkImages = closestPark.images					
@@ -72,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.querySelector(".slideshow").style.visibility = "visible";	
 					document.querySelector("#topFive").style.visibility = "visible";
 					document.querySelector(".previous").innerText = "<<";
+
 
 
 					// Creates functions for the previous and next buttons to display a slideshow of multiple park images when clicked
