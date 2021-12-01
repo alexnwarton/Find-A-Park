@@ -21,6 +21,20 @@ body {
   height: 78px;
   width: 200px;
   font-size: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: forestgreen;
+  color:  white;
+  height: 75px;
+  width: 200px;
+  font-size: 50px;
+  align-items: center;
+  border-radius: 15px;
+}
+
+#firstBtn:hover {
+  color: forestgreen;
+  background-color: white;
 }
 
 h1 {
@@ -355,6 +369,99 @@ a:hover {
   header {
     height: 75%;
     width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: flex-start;
+    margin: auto;
+  }
+
+  #firstH1 {
+    font-size: 150px;
+    display: flex;
+    margin-bottom: 10px;
+    font-family: "Cabin Sketch";
+  }
+
+  #firstInput {
+    height:  70px;
+    width:  600px;
+    font-size: 50px;
+  }
+
+  #firstBtn {
+    height: 78px;
+    width: 200px;
+    font-size: 50px;
+  }
+
+  ul {
+    display:  inline;
+    flex-direction: column;
+    align-content: center;
+    column-count: 2;
+    column-gap: 50px;
+    word-wrap: normal;
+    width:  auto;
+    font-size: 130%;
+  }
+
+
+  input {
+    height: 20px;
+    width: 200px;
+    font-size: 15px;
+    margin-top: 2px;
+  }
+
+  button {
+    height: 28px;
+    width: 70px;
+    font-size: 15px;
+    padding-bottom: 2px;
+  }
+
+  #parkImage {
+    height:  500px;
+  }
+
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 40px;
+  }
+
+  p {
+    width:  50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    font-size: 130%;
+  }
+
+  #descriptionH2 {
+    margin-top: 10px;
+  }
+  
+  footer {
+    margin-top:  15px;
+    font-size: 120%;
+  }
+
+}
+
+@media (min-width: 1700px) {
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    height: 75%;
+    width: 50%;
     display: flex;
     flex-direction: row;
     justify-content: center;

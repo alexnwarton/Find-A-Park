@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.querySelector("#topFive").style.visibility = "hidden";
 	
 	// Fetches data from national parks API based on park postal code
-	fetch(`${baseUrl}?limit=500&q="postalCode"&&api_key=${apiKey}`)
+	fetch(`${baseUrl}?limit=500&q="National Park"&q="postalCode"&&api_key=${apiKey}`)
 		
 		.then((response) => {
 			return response.json();
@@ -27,13 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		.then((jsonResponse) => {
 			
 			let parkList = findParks(jsonResponse);
-			
 			// Adds an event listener for when the button is clicked
 			btn.addEventListener("click", () => {
 
 				// Styles the header as soon as the button is clicked
 				headerStyling();
-			
+		
 				// Obtains the user input
 				let userInput = document.querySelector("input").value;
 				let zipToLatLong = [];
@@ -59,6 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
 					let fiveParks = fiveClosestParks(parkList, userInput);
 					document.querySelector("#topFive").innerHTML = "";
 					populateDropDown(fiveParks);
+
+
+					// Want to select the option and assign the closest park to the selected option 
+					if(document.querySelector("option").onclick) {
+						(ev) => console.log(ev.target.value)
+					}
 
 					const parkImages = closestPark.images					
 
@@ -98,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
 						}
 						else {
 							counter++;
-							console.log(counter);
 						}
 						slider.setAttribute("src", parkImages[counter].url);
 					}
